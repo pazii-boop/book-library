@@ -116,3 +116,17 @@ body {
   position: sticky;
   bottom: 0;
 }
+.read-book-link {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #6200ea;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.read-book-link:hover {
+  background-color: #3700b3;
+}

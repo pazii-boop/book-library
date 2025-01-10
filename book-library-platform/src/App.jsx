@@ -59,6 +59,11 @@ function App() {
       case "home":
         return (
           <>
+            {loading && <p className="loading">Loading...</p>}
+            {error && <p className="error">Error: {error}</p>}
+            {!loading && books.length === 0 && !error && (
+              <p className="no-results"></p>
+            )}
             <section className="results">
               {books.map((book) => (
                 <BookCard

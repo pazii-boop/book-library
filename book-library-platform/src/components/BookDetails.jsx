@@ -1,35 +1,38 @@
 import React from "react";
 
 const BookDetails = ({ book, addToReadBooks }) => {
-  // Get the book cover URL (if available)
-  const coverUrl = book.cover
-    ? book.cover.medium
-    : "https://via.placeholder.com/150"; // Placeholder if no cover exists
+  const openLibraryURL = `https://openlibrary.org${book.key}`;
 
   return (
     <div className="book-details">
-      <h2>{book.title}</h2>
-      {/* Show the book cover image */}
       <img
-        src={coverUrl}
-        alt={`${book.title} cover`}
-        style={{ width: "200px", height: "auto" }} // Optional styling to control the image size
+        src={
+          book.cover_i
+            ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`
+            : "default_cover.jpg"
+        }
+        alt={book.title}
+        className="book-cover"
       />
-      <p>
-        <strong>Author:</strong>{" "}
-        {book.authors?.map((a) => a.name).join(", ") || "Unknown"}
+      <h2 className="book-title">{book.title}</h2>
+      <p className="book-author">
+        {book.author_name ? book.author_name.join(", ") : "Unknown Author"}
       </p>
-      <p>
-        <strong>Description:</strong>{" "}
-        {book.description || "No description available"}
+      <p className="book-publisher">
+        Publisher: {book.publisher ? book.publisher.join(", ") : "Unknown"}
       </p>
-      <p>
-        <strong>Publisher:</strong> {book.publishers?.[0]?.name || "Unknown"}
+      <p className="book-published">
+        Published: {book.first_publish_year || "Unknown"}
       </p>
-      <p>
-        <strong>Publication Date:</strong> {book.publish_date || "Unknown"}
-      </p>
-      <button onClick={() => addToReadBooks(book)}>Mark as Read</button>
+      <button onClick={() => addToReadBooks(book)}>Add to Read Books</button>
+      <a
+        href={openLibraryURL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="read-book-link"
+      >
+        Read this Book
+      </a>
     </div>
   );
 };
